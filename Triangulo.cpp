@@ -27,20 +27,22 @@ bool Triangulo::hayImpacto(const Rayo& rayo, double& tmin, Vector3D& n, Punto3D&
     double l = A.z - rayo.o.z;
 
     double determinante = a * ( f * k - g * j ) + b * ( g * i - e * k ) + c * ( e * j - f * i );
-
-    double beta = (d * ( f * k - g * j ) + b * (g*l -h *k) + c * ( h * j - f * l )) / determinante;
-    double gama = (a * ( h * k - g * l ) - d * ( e * k - g* i ) +c * ( e * l - h * i)) / determinante;
-    double t = (a * ( f * l - h * j ) - b * ( e * l - h * i ) + d * ( e * j - f * i ))/determinante;
-
-    if(beta + gama > 1.0 || beta + gama <0.0)
+    double temp1 = (d * ( f * k - g * j ) + b * ( g * l - h * k ) + c * ( h * j - f * l ));
+    double temp2 = (a * ( h * k - g * l ) - d * ( e * k - g * i ) + c * ( e * l - h * i));
+    double temp3 = (a * ( f * l - h * j ) - b * ( e * l - h * i ) + d * ( e * j - f * i ));
+    double beta =  temp1/determinante;
+    double gama = temp2/determinante;
+    double t = temp3/determinante;
+    
+    if(beta + gama > 1.0 || beta + gama < 0.0)
     {
         return false;
     } 
-    if(beta < 0.0 || beta >1.0) 
+    if(beta < 0.0 || beta > 1.0) 
     {
         return false;
     } 
-    if(gama < 0.0 || gama>1.0) 
+    if(gama < 0.0 || gama > 1.0) 
     {
         return false;
     }  
