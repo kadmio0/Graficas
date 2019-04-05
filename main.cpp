@@ -296,9 +296,9 @@ int main() {
             Punto3D origen(x, y, z);
             Rayo rayo(origen, direccion);
 
-            pixeles[fil*width+col].r = obtenerColorPixel(rayo, escena).r;
-            pixeles[fil*width+col].g = obtenerColorPixel(rayo, escena).g;
-            pixeles[fil*width+col].b = obtenerColorPixel(rayo, escena).b;
+            pixeles[fil*width+col].r = obtenerColorPixel(rayo, escena, luz).r;
+            pixeles[fil*width+col].g = obtenerColorPixel(rayo, escena, luz).g;
+            pixeles[fil*width+col].b = obtenerColorPixel(rayo, escena, luz).b;
         }
     }    
     savebmp("img.bmp", width, height, dpi, pixeles);
