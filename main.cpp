@@ -163,18 +163,23 @@ int main() {
     Triangulo triangulo13(A13,B13,C13);
     triangulo13.establecerColor(0.709, 0.031, 0.043);
 
-    Punto3D A14(-260.0,20.0,-300.0);
-    Punto3D B14(-240.0,20.0,-300.0);
-    Punto3D C14(-250.0,40.0,-300.0);
+    Punto3D A14(-260.0,25.0,-300.0);
+    Punto3D B14(-240.0,25.0,-300.0);
+    Punto3D C14(-250.0,45.0,-300.0);
     Triangulo triangulo14(A14,B14,C14);
     triangulo14.establecerColor(0.709, 0.031, 0.043);
 
-    Punto3D A15(-280.0,-40.0,-300.0);
-    Punto3D B15(-260.0,-40.0,-300.0);
-    Punto3D C15(-270.0,-20.0,-300.0);
+    Punto3D A15(-280.0,-35.0,-300.0);
+    Punto3D B15(-260.0,-35.0,-300.0);
+    Punto3D C15(-270.0,-15.0,-300.0);
     Triangulo triangulo15(A15,B15,C15);
     triangulo15.establecerColor(0.709, 0.031, 0.043);
-    
+
+    Punto3D A16(-240.0,-35.0,-300.0);
+    Punto3D B16(-220.0,-35.0,-300.0);
+    Punto3D C16(-230.0,-15.0,-300.0);
+    Triangulo triangulo16(A16,B16,C16);
+    triangulo16.establecerColor(0.709, 0.031, 0.043);    
     
     vector<ObjetoGeometrico*> escena;
     escena.push_back(&esfera1);
