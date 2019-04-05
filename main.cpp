@@ -204,6 +204,7 @@ int main() {
     escena.push_back(&triangulo13);
     escena.push_back(&triangulo14);
     escena.push_back(&triangulo15);
+    escena.push_back(&triangulo16);
     
      // VIEWPLANE
     int hres = 800;
