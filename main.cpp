@@ -25,9 +25,17 @@ ColorRGB obtenerColorPixel(const Rayo& r, vector<ObjetoGeometrico*> objetos){
     Vector3D h;
     for(int i = 0; i < objetos.size(); i++) {
         if( objetos[i]->hayImpacto(r, t, n, q) && t < tmin){
-            color.r = objetos[i]->obtenerColor().r;
-            color.g = objetos[i]->obtenerColor().g;
-            color.b = objetos[i]->obtenerColor().b;
+            // color.r = objetos[i]->obtenerColor().r;
+            // color.g = objetos[i]->obtenerColor().g;
+            // color.b = objetos[i]->obtenerColor().b;
+
+            // color.r = objetos[i]->obtenerColor().r * luz.color.r * std::max(0.0, n * (luz.posicion - q).hat() );
+            // color.g = objetos[i]->obtenerColor().g * luz.color.g * std::max(0.0, n * (luz.posicion - q).hat() );
+            // color.b = objetos[i]->obtenerColor().b * luz.color.b * std::max(0.0, n * (luz.posicion - q).hat() );
+
+            color.r = objetos[i]->obtenerColor().r * luz.color.r * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().r * luz.color.r * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),150000);
+            color.g = objetos[i]->obtenerColor().g * luz.color.g * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().g * luz.color.g * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),150000);
+            color.b = objetos[i]->obtenerColor().b * luz.color.b * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().b * luz.color.b * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),150000);
 
             tmin = t;
         }
@@ -41,7 +49,7 @@ int main() {
     Punto3D centro1(0.0, 0.0, -400.0);
     double radio1 = 90;
     Esfera esfera1(centro1, radio1);   
-    esfera1.establecerColor(0.976, 0.474, 0.082);//(0.30, 0.40, 1.0); // entre [0-1]
+    esfera1.establecerColor(0.976, 0.474, 0.082);// entre [0-1]
 
     Punto3D centro2(-125.0, 180.0, -200.0); 
     Esfera esfera2(centro2, radio1);   
@@ -67,13 +75,7 @@ int main() {
     Esfera esfera7(centro7, radio1);   
     esfera7.establecerColor(0.976, 0.474, 0.082);
 
-    
-    Punto3D punto1(200.0, 0.0, -200.0);
-    Vector3D q(100.0, 200.0, -400.0);
-    Plano plano(punto1,q);
-    plano.establecerColor(0.0, 0.20, 0.30);
-    
-    
+    //7 estrellas---------------------------------------------------------------------
     //centro
     Punto3D A(-10.0,-10.0,-300.0);
     Punto3D B(10.0,-10.0,-300.0);
@@ -94,7 +96,7 @@ int main() {
     Triangulo triangulo3(A3,B3,C3);
     triangulo3.establecerColor(0.709, 0.031, 0.043);
     
-    //centro laterales
+    //estrellas laterales
     Punto3D A4(-50.0,-10.0,-300.0);
     Punto3D B4(-30.0,-10.0,-300.0);
     Punto3D C4(-40.0, 10.0, -300.0);
@@ -120,6 +122,60 @@ int main() {
     Triangulo triangulo7(A7,B7,C7);
     triangulo7.establecerColor(0.709, 0.031, 0.043);
 
+    //1 estrella---------------------------------------------------------------------
+    //(-125.0, 180.0, -200.0);
+    Punto3D A8(-135.0,170,-300.0);
+    Punto3D B8(-115.0,170,-300.0);
+    Punto3D C8(-125.0,190,-300.0);
+    Triangulo triangulo8(A8,B8,C8);
+    triangulo8.establecerColor(0.709, 0.031, 0.043);
+
+    //2 estrellas (125.0, 180.0, -400.0)---------------------------------------------------------------------
+    Punto3D A9(90.0,180,-300.0);
+    Punto3D B9(110.0,180,-300.0);
+    Punto3D C9(100.0,200,-300.0);
+    Triangulo triangulo9(A9,B9,C9);
+    triangulo9.establecerColor(0.709, 0.031, 0.043);
+
+    Punto3D A10(140.0,160,-300.0);
+    Punto3D B10(160.0,160,-300.0);
+    Punto3D C10(150.0,180,-300.0);
+    Triangulo triangulo10(A10,B10,C10);
+    triangulo10.establecerColor(0.709, 0.031, 0.043);
+
+    //5 estrellas (250.0, 0.0, -400.0)-----------------------------------------------------------------
+    
+    Punto3D A11(-260.0,-10.0,-300.0);
+    Punto3D B11(-240.0,-10.0,-300.0);
+    Punto3D C11(-250.0,10.0,-300.0);
+    Triangulo triangulo11(A11,B11,C11);
+    triangulo11.establecerColor(0.709, 0.031, 0.043);
+
+    Punto3D A12(-295.0,0.0,-300.0);
+    Punto3D B12(-275.0,0.0,-300.0);
+    Punto3D C12(-285.0,20.0,-300.0);
+    Triangulo triangulo12(A12,B12,C12);
+    triangulo12.establecerColor(0.709, 0.031, 0.043);
+    
+    Punto3D A13(-225.0,0.0,-300.0);
+    Punto3D B13(-205.0,0.0,-300.0);
+    Punto3D C13(-215.0,20.0,-300.0);
+    Triangulo triangulo13(A13,B13,C13);
+    triangulo13.establecerColor(0.709, 0.031, 0.043);
+
+    Punto3D A14(-260.0,20.0,-300.0);
+    Punto3D B14(-240.0,20.0,-300.0);
+    Punto3D C14(-250.0,40.0,-300.0);
+    Triangulo triangulo14(A14,B14,C14);
+    triangulo14.establecerColor(0.709, 0.031, 0.043);
+
+    Punto3D A15(-280.0,-40.0,-300.0);
+    Punto3D B15(-260.0,-40.0,-300.0);
+    Punto3D C15(-270.0,-20.0,-300.0);
+    Triangulo triangulo15(A15,B15,C15);
+    triangulo15.establecerColor(0.709, 0.031, 0.043);
+    
+    
     vector<ObjetoGeometrico*> escena;
     escena.push_back(&esfera1);
     escena.push_back(&esfera2);
@@ -135,7 +191,14 @@ int main() {
     escena.push_back(&triangulo5);
     escena.push_back(&triangulo6);
     escena.push_back(&triangulo7);
-    //escena.push_back(&plano);
+    escena.push_back(&triangulo8);
+    escena.push_back(&triangulo9);
+    escena.push_back(&triangulo10);
+    escena.push_back(&triangulo11);
+    escena.push_back(&triangulo12);
+    escena.push_back(&triangulo13);
+    escena.push_back(&triangulo14);
+    escena.push_back(&triangulo15);
     
      // VIEWPLANE
     int hres = 800;
