@@ -44,6 +44,8 @@ ColorRGB obtenerColorPixel(const Rayo& r, vector<ObjetoGeometrico*> objetos){
 }
 
 int main() {
+    
+    LuzPuntual luz(1.0, 1.0, 1.0, -200, 170, 30);
 
     // ESCENA------------------------------------------------------------------
     Punto3D centro1(0.0, 0.0, -400.0);
