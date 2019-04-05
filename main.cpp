@@ -179,7 +179,27 @@ int main() {
     Punto3D B16(-220.0,-35.0,-300.0);
     Punto3D C16(-230.0,-15.0,-300.0);
     Triangulo triangulo16(A16,B16,C16);
-    triangulo16.establecerColor(0.709, 0.031, 0.043);    
+    triangulo16.establecerColor(0.709, 0.031, 0.043);
+    
+    //3 estrellas-----------------------------------------------------------------
+
+    Punto3D A17(240.0,10.0,-300.0);
+    Punto3D B17(260.0,10.0,-300.0);
+    Punto3D C17(250.0,30.0,-300.0);
+    Triangulo triangulo17(A17,B17,C17);
+    triangulo17.establecerColor(0.709, 0.031, 0.043);
+    
+    Punto3D A18(220.0,-20.0,-300.0);
+    Punto3D B18(240.0,-20.0,-300.0);
+    Punto3D C18(230.0,0.0,-300.0);
+    Triangulo triangulo18(A18,B18,C18);
+    triangulo18.establecerColor(0.709, 0.031, 0.043);
+
+    Punto3D A19(260.0,-20.0,-300.0);
+    Punto3D B19(280.0,-20.0,-300.0);
+    Punto3D C19(270.0,0.0,-300.0);
+    Triangulo triangulo19(A19,B19,C19);
+    triangulo19.establecerColor(0.709, 0.031, 0.043);
     
     vector<ObjetoGeometrico*> escena;
     escena.push_back(&esfera1);
@@ -205,6 +225,9 @@ int main() {
     escena.push_back(&triangulo14);
     escena.push_back(&triangulo15);
     escena.push_back(&triangulo16);
+    escena.push_back(&triangulo17);
+    escena.push_back(&triangulo18);
+    escena.push_back(&triangulo19);
     
      // VIEWPLANE
     int hres = 800;
