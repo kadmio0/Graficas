@@ -201,6 +201,38 @@ int main() {
     Triangulo triangulo19(A19,B19,C19);
     triangulo19.establecerColor(0.709, 0.031, 0.043);
     
+    //5 estrellas---------------------------------------------------------------
+    
+    Punto3D A20(-135.0,-155.0,-300.0);
+    Punto3D B20(-115.0,-155.0,-300.0);
+    Punto3D C20(-125.0,-135.0,-300.0);
+    Triangulo triangulo20(A20,B20,C20);
+    triangulo20.establecerColor(0.709, 0.031, 0.043);
+
+    Punto3D A21(-155.0,-210.0,-300.0);
+    Punto3D B21(-135.0,-210.0,-300.0);
+    Punto3D C21(-145.0,-190.0,-300.0);
+    Triangulo triangulo21(A21,B21,C21);
+    triangulo21.establecerColor(0.709, 0.031, 0.043);
+
+    Punto3D A22(-115.0,-210.0,-300.0);
+    Punto3D B22(-95.0,-210.0,-300.0);
+    Punto3D C22(-105.0,-190.0,-300.0);
+    Triangulo triangulo22(A22,B22,C22);
+    triangulo22.establecerColor(0.709, 0.031, 0.043);
+
+    Punto3D A23(-165.0,-180.0,-300.0);
+    Punto3D B23(-145.0,-180.0,-300.0);
+    Punto3D C23(-155.0,-160.0,-300.0);
+    Triangulo triangulo23(A23,B23,C23);
+    triangulo23.establecerColor(0.709, 0.031, 0.043);
+
+    Punto3D A24(-105.0,-180.0,-300.0);
+    Punto3D B24(-85.0,-180.0,-300.0);
+    Punto3D C24(-95.0,-160.0,-300.0);
+    Triangulo triangulo24(A24,B24,C24);
+    triangulo24.establecerColor(0.709, 0.031, 0.043);
+    
     vector<ObjetoGeometrico*> escena;
     escena.push_back(&esfera1);
     escena.push_back(&esfera2);
@@ -228,6 +260,11 @@ int main() {
     escena.push_back(&triangulo17);
     escena.push_back(&triangulo18);
     escena.push_back(&triangulo19);
+    escena.push_back(&triangulo20);
+    escena.push_back(&triangulo21);
+    escena.push_back(&triangulo22);
+    escena.push_back(&triangulo23);
+    escena.push_back(&triangulo24);
     
      // VIEWPLANE
     int hres = 800;
