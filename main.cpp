@@ -33,9 +33,9 @@ ColorRGB obtenerColorPixel(const Rayo& r, vector<ObjetoGeometrico*> objetos){
             // color.g = objetos[i]->obtenerColor().g * luz.color.g * std::max(0.0, n * (luz.posicion - q).hat() );
             // color.b = objetos[i]->obtenerColor().b * luz.color.b * std::max(0.0, n * (luz.posicion - q).hat() );
 
-            color.r = objetos[i]->obtenerColor().r * luz.color.r * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().r * luz.color.r * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),150000);
-            color.g = objetos[i]->obtenerColor().g * luz.color.g * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().g * luz.color.g * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),150000);
-            color.b = objetos[i]->obtenerColor().b * luz.color.b * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().b * luz.color.b * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),150000);
+            color.r = objetos[i]->obtenerColor().r * luz.color.r * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().r * luz.color.r * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),10);
+            color.g = objetos[i]->obtenerColor().g * luz.color.g * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().g * luz.color.g * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),10);
+            color.b = objetos[i]->obtenerColor().b * luz.color.b * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().b * luz.color.b * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),10);
 
             tmin = t;
         }
@@ -53,27 +53,27 @@ int main() {
     Esfera esfera1(centro1, radio1);   
     esfera1.establecerColor(0.976, 0.474, 0.082);// entre [0-1]
 
-    Punto3D centro2(-125.0, 180.0, -200.0); 
+    Punto3D centro2(-125.0, 180.0, -400.0); 
     Esfera esfera2(centro2, radio1);   
     esfera2.establecerColor(0.976, 0.474, 0.082);
 
-    Punto3D centro3(125.0, 180.0, -200.0); 
+    Punto3D centro3(125.0, 180.0, -400.0); 
     Esfera esfera3(centro3, radio1);   
     esfera3.establecerColor(0.976, 0.474, 0.082);
     
-    Punto3D centro4(250.0, 0.0, -200.0); 
+    Punto3D centro4(250.0, 0.0, -400.0); 
     Esfera esfera4(centro4, radio1);   
     esfera4.establecerColor(0.976, 0.474, 0.082);
     
-    Punto3D centro5(-250.0, 0.0, -200.0); 
+    Punto3D centro5(-250.0, 0.0, -400.0); 
     Esfera esfera5(centro5, radio1);   
     esfera5.establecerColor(0.976, 0.474, 0.082);
 
-    Punto3D centro6(125.0, -180.0, -200.0); 
+    Punto3D centro6(125.0, -180.0, -400.0); 
     Esfera esfera6(centro6, radio1);   
     esfera6.establecerColor(0.976, 0.474, 0.082);
     
-    Punto3D centro7(-125.0, -180.0, -200.0); 
+    Punto3D centro7(-125.0, -180.0, -400.0); 
     Esfera esfera7(centro7, radio1);   
     esfera7.establecerColor(0.976, 0.474, 0.082);
 
