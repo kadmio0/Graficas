@@ -7,46 +7,48 @@ Triangulo::Triangulo(Punto3D a, Punto3D b, Punto3D c)
     B = b;
     C = c;
 }
-
-bool Triangulo::hayImpacto(const Rayo& rayo, double& tmin, Vector3D& n, Punto3D& q) const
+bool Triangulo::hayImpacto(const Rayo& r, double& tmin, Vector3D& n, Punto3D& q) const
 {
-    
+    // Cambio de variables
     double a = A.x - B.x;
     double b = A.x - C.x;
-    double c = rayo.d.x;
-    double d = A.x - rayo.o.x;
-
+    double c = r.d.x;
+    double d = A.x -r.o.x;
     double e = A.y - B.y;
     double f = A.y - C.y;
-    double g = rayo.d.y;
-    double h = A.y - rayo.o.y;
-
+    double g = r.d.y;
+    double h = A.y - r.o.y;
     double i = A.z - B.z;
     double j = A.z - C.z;
-    double k = rayo.d.z;
-    double l = A.z - rayo.o.z;
+    double k = r.d.z;
+    double l = A.z - r.o.z;
 
-    double determinante = a * ( f * k - g * j ) + b * ( g * i - e * k ) + c * ( e * j - f * i );
-    double temp1 = (d * ( f * k - g * j ) + b * ( g * l - h * k ) + c * ( h * j - f * l ));
-    double temp2 = (a * ( h * k - g * l ) - d * ( e * k - g * i ) + c * ( e * l - h * i));
-    double temp3 = (a * ( f * l - h * j ) - b * ( e * l - h * i ) + d * ( e * j - f * i ));
-    double beta =  temp1/determinante;
-    double gama = temp2/determinante;
-    double t = temp3/determinante;
-    
-    if(beta + gama > 1.0 || beta + gama < 0.0)
+    double det = a * ( f * k - g * j ) + b * ( g * i - e * k ) + c * ( e * j - f * i );
+
+    double beta = (d * ( f * k - g * j ) + b * (g*l -h *k) + c * ( h * j - f * l )) / det;
+    double gama = (a * ( h * k - g * l ) - d * ( e * k - g* i ) +c * ( e * l - h * i)) / det;
+    double t = (a * ( f * l - h * j ) - b * ( e * l - h * i ) + d * ( e * j - f * i ))/det;
+
+    if ( beta < 0.0) 
     {
         return false;
     } 
-    if(beta < 0.0 || beta > 1.0) 
+    if ( gama < 0.0 ) 
     {
         return false;
-    } 
-    if(gama < 0.0 || gama > 1.0) 
+    }
+    if ( beta + gama > 1.0)
     {
         return false;
-    }  
+    }
+    if ( t < 0.00000001)
+    {
+        return false;
+    }
     tmin = t;
+    n = (( B - A )^( C - A)).hat();
+    q = r.o + t * r.d;
+    // n.mostrar_vector();
     return true;
 }
 
@@ -56,10 +58,9 @@ void Triangulo::establecerColor(double v_r, double v_g, double v_b)
     color.g = v_g;
     color.b = v_b;
 }
-
 ColorRGB Triangulo::obtenerColor()
 {
-    ColorRGB c;
+ColorRGB c;
     c.r = color.r;
     c.g = color.g;
     c.b = color.b;
