@@ -46,22 +46,43 @@ ColorRGB obtenerColorPixel(const Rayo& r, vector<ObjetoGeometrico*> objetos, Luz
             // color.g = objetos[i]->obtenerColor().g * luz_ambiente.color.g;
             // color.b = objetos[i]->obtenerColor().b * luz_ambiente.color.b;
  
-
-            color.r = objetos[i]->obtenerColor().r * luz_ambiente.color.r;
-            color.g = objetos[i]->obtenerColor().g * luz_ambiente.color.g;
-            color.b = objetos[i]->obtenerColor().b * luz_ambiente.color.b;
-            double t_sombra;
-            double t_min_sombra = 2000000;
-            Vector3D n_sombra;
-            Punto3D q_sombra;
-            Rayo rayo_sombra(q, (luz.posicion - q)) ;
-            for (int j = 0; j < objetos.size(); j++) {
-                if ((objetos[j]->hayImpacto(rayo_sombra, t_sombra, n_sombra, q_sombra) && t_sombra < t_min_sombra)) {
-                    color.r = objetos[i]->obtenerColor().r * luz_ambiente.color.r + objetos[i]->obtenerColor().r * luz.color.r * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().r * luz.color.r * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),100);
-                    color.g = objetos[i]->obtenerColor().g * luz_ambiente.color.g + objetos[i]->obtenerColor().g * luz.color.g * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().g * luz.color.g * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),100);
-                    color.b = objetos[i]->obtenerColor().b * luz_ambiente.color.b + objetos[i]->obtenerColor().b * luz.color.b * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().b * luz.color.b * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),100);
-                    t_min_sombra = t_sombra;
+            if(i<objetos.size()-2){
+                color.r = objetos[i]->obtenerColor().r * luz_ambiente.color.r;
+                color.g = objetos[i]->obtenerColor().g * luz_ambiente.color.g;
+                color.b = objetos[i]->obtenerColor().b * luz_ambiente.color.b;
+                double t_sombra;
+                double t_min_sombra = 2000000;
+                Vector3D n_sombra;
+                Punto3D q_sombra;
+                Rayo rayo_sombra(q, (luz.posicion - q)) ;
+                for (int j = 0; j < objetos.size(); j++) {
+                    if ((objetos[j]->hayImpacto(rayo_sombra, t_sombra, n_sombra, q_sombra) && t_sombra < t_min_sombra)) {
+                        color.r = objetos[i]->obtenerColor().r * luz_ambiente.color.r + objetos[i]->obtenerColor().r * luz.color.r * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().r * luz.color.r * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),100);
+                        color.g = objetos[i]->obtenerColor().g * luz_ambiente.color.g + objetos[i]->obtenerColor().g * luz.color.g * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().g * luz.color.g * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),100);
+                        color.b = objetos[i]->obtenerColor().b * luz_ambiente.color.b + objetos[i]->obtenerColor().b * luz.color.b * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().b * luz.color.b * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),100);
+                        t_min_sombra = t_sombra;
+                    }
                 }
+            }
+            else{
+                color.r = objetos[i]->obtenerColor().r * luz_ambiente.color.r + objetos[i]->obtenerColor().r * luz.color.r * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().r * luz.color.r * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),100);
+                color.g = objetos[i]->obtenerColor().g * luz_ambiente.color.g + objetos[i]->obtenerColor().g * luz.color.g * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().g * luz.color.g * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),100);
+                color.b = objetos[i]->obtenerColor().b * luz_ambiente.color.b + objetos[i]->obtenerColor().b * luz.color.b * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().b * luz.color.b * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),100);
+                    
+                double t_sombra;
+                double t_min_sombra = 2000000;
+                Vector3D n_sombra;
+                Punto3D q_sombra;
+                Rayo rayo_sombra(q, (luz.posicion - q)) ;
+                for (int j = 0; j < objetos.size(); j++) {
+                    if ((objetos[j]->hayImpacto(rayo_sombra, t_sombra, n_sombra, q_sombra) && t_sombra < t_min_sombra)) {
+                        color.r = objetos[i]->obtenerColor().r * luz_ambiente.color.r;
+                        color.g = objetos[i]->obtenerColor().g * luz_ambiente.color.g;
+                        color.b = objetos[i]->obtenerColor().b * luz_ambiente.color.b;
+                        t_min_sombra = t_sombra;
+                    }
+                }
+
             }
             tmin = t;
         }
@@ -593,8 +614,6 @@ int main() {
  
     
     vector<ObjetoGeometrico*> escena;
-    escena.push_back(&ttriangulo1); 
-    escena.push_back(&ttriangulo2); 
     escena.push_back(&esfera1);
     escena.push_back(&esfera2);
     escena.push_back(&esfera3);
@@ -687,6 +706,8 @@ int main() {
     escena.push_back(&triangulo31_1);
     escena.push_back(&triangulo31_2);
 
+    escena.push_back(&ttriangulo1); 
+    escena.push_back(&ttriangulo2);
 
      // VIEWPLANE
     int hres = 800;
