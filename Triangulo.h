@@ -14,11 +14,13 @@ public:
     void establecerTextura(Image& img);
     double calcularU(Vector3D& n);
     double calcularV(Vector3D& n);
+    bool tieneTextura();
 
 
     Punto3D A, B, C;
     ColorRGB color;
     Image img;
+    bool textura;
 };
 
 #endif

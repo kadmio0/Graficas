@@ -55,4 +55,15 @@ ColorRGB Plano::obtenerColorTextura(double u,double v){
 
 void Plano::establecerTextura(Image& img2){
     img = img2;
+    if(img.pixels.empty()){
+        textura=false;
+    }
+    else
+    {
+        textura=true;
+    } 
+}
+
+bool Plano::tieneTextura(){
+    bool textura;
 }

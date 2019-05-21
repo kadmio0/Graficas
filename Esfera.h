@@ -16,11 +16,12 @@ class Esfera : public ObjetoGeometrico
     void establecerTextura(Image& img);
     double calcularU(Vector3D& n);
     double calcularV(Vector3D& n);
-
+    bool tieneTextura();
 
     Punto3D c;
     double r;
     ColorRGB color;
     Image img;
+    bool textura;
 };
 #endif

@@ -84,4 +84,15 @@ ColorRGB Triangulo::obtenerColorTextura(double u,double v){
 
 void Triangulo::establecerTextura(Image& img2){
     img = img2;
+    if(img.pixels.empty()){
+        textura=false;
+    }
+    else
+    {
+        textura=true;
+    } 
+}
+
+bool Triangulo::tieneTextura(){
+    return textura;
 }

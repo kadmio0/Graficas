@@ -99,8 +99,12 @@ ColorRGB obtenerColorPixel( const Rayo& r,
              
             u = objetos[i]->calcularU(n);
             v = objetos[i]->calcularV(n);
-
-            finalColor=objetos[i]->obtenerColorTextura(u,v); 
+            if(objetos[i]->tieneTextura()){
+                finalColor=objetos[i]->obtenerColorTextura(u,v); 
+            }
+            else{
+                finalColor=objetos[i]->obtenerColor();
+            }
             
            // if(i<objetos.size()-2){
                 color.r = finalColor.r * luz_ambiente.color.r;
@@ -163,13 +167,14 @@ int main(int argc, char *argv[]) {
 
     Punto3D centro2(-100.0,100.0,-600.0);
     Esfera esfera2(centro2,radio1);
+    esfera1.establecerColor(0.976, 0.474, 0.082);
 
 
-    Image img,img2,img3;
-    img.read_ppm_file("planeta.ppm");
+    Image img,img2,img3; 
     cout<<"LEI LA IMAGEN 1"<<endl;
     img2.read_ppm_file("planeta2.ppm");
     cout<<"LEI LA IMAGEN 2"<<endl;
+    img.read_ppm_file("planeta.ppm");
 
     esfera1.establecerTextura(img);
     esfera2.establecerTextura(img2);

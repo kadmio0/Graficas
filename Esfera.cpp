@@ -9,7 +9,7 @@ Esfera::Esfera(Punto3D v_c, double v_r):c( v_c), r( v_r)
 { 
     color.r = 1.0;
     color.g = 1.0;
-    color.b = 0.0;
+    color.b = 0.0; 
 }
 
 Esfera::~Esfera(){}
@@ -100,5 +100,16 @@ ColorRGB Esfera::obtenerColorTextura(double u,double v){
 
 void Esfera::establecerTextura(Image& img2){
     img = img2;
+    if(img.pixels.empty()){
+        textura=false;
+    }
+    else
+    {
+        textura=true;
+    } 
 }
 
+
+bool Esfera::tieneTextura(){
+    return textura;
+}
