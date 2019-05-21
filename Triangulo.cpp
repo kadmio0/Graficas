@@ -60,9 +60,28 @@ void Triangulo::establecerColor(double v_r, double v_g, double v_b)
 }
 ColorRGB Triangulo::obtenerColor()
 {
-ColorRGB c;
+    ColorRGB c;
     c.r = color.r;
     c.g = color.g;
     c.b = color.b;
     return  c;
+}
+
+double Triangulo::calcularU(Vector3D& n){
+    return 0;
+}
+
+double Triangulo::calcularV(Vector3D& n){
+    return 0;
+}
+
+
+ColorRGB Triangulo::obtenerColorTextura(double u,double v){
+    int column = u * img.hres;
+    int row = v * img.vres; 
+    return img.get_color(row,column);
+}
+
+void Triangulo::establecerTextura(Image& img2){
+    img = img2;
 }
