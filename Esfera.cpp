@@ -74,18 +74,20 @@ ColorRGB Esfera::obtenerColor()
 double Esfera::calcularU(Vector3D& n){
     double PI = 3.14159265358979323846;
     Vector3D normal = n;
-    normal.hat(); 
+    normal.hat();
+    double phi  = atan2(normal.z, normal.x);
     
-     
+    return  0.5 + phi / (2 * PI);
     //u = 1 - phi / (2*PI);
 }
 
 double Esfera::calcularV(Vector3D& n){
     double PI = 3.14159265358979323846;
     Vector3D normal = n;
-    normal.hat(); 
+    normal.hat();
+    double theta = asin(normal.y);
     // X - theta  X = 0 abajo     X = 1 arriba     
-     
+    return  0.5 - theta / PI;
     //v = (theta + PI / 2) / PI;
 }
 
