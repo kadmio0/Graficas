@@ -56,22 +56,22 @@ Image::read_ppm_file(const char* file_name) {
     FILE* file = fopen(file_name, "rb");
     
     if (file == 0){
-		cout << "could not open file" << endl;
+		cout << "No se pudo abrir el archivo" << endl;
 	}
 	else
-		cout << "file opened" << endl;
+		cout << "Archivo abierto" << endl;
 
     // PPM header
     
     unsigned char ppm_type;
     if (fscanf(file, "P%c\n", &ppm_type) != 1){
-		cout << "Invalid PPM signature" << endl;
+		cout << "Archivo ppm invalido" << endl;
 	}
 	
     // only binary PPM supported
     
     if (ppm_type != '6'){
-		cout << "Only binary PPM supported" << endl;
+		cout << "Solo archivos ppm" << endl;
 	}
 
     // skip comments
@@ -83,17 +83,17 @@ Image::read_ppm_file(const char* file_name) {
     // read image size
     
     if (fscanf(file, "%d %d\n", &hres, &vres) != 2){
-		cout << "Invalid image size" << endl;
+		cout << "Tamanio de imagen invalido" << endl;
 	}
 
     if (hres <= 0)
-		cout << "Invalid image width" << endl;
+		cout << "Ancho de imagen invalido" << endl;
 	else
 		cout << "hres = " << hres << endl;
 
     
 	if (vres <= 0)
-		cout << "Invalid image height" << endl;
+		cout << "Alto de imagen invalido" << endl;
 	else
 		cout << "vres = " << vres << endl;
 
@@ -119,7 +119,7 @@ Image::read_ppm_file(const char* file_name) {
             unsigned char blue;
             
             if (fscanf(file, "%c%c%c", &red, &green, &blue) != 3) {
-				cout << "Invalid image" << endl;
+				cout << "imagen invalida" << endl;
 			}
 			color.r = red   * inv_max_value;
 			color.g = green * inv_max_value;
@@ -132,7 +132,7 @@ Image::read_ppm_file(const char* file_name) {
     // close file
     
     fclose(file); 
-	cout << "Pixels = " << pixels.size() << endl;  
+	cout << "pixeles = " << pixels.size() << endl;  
 }
 
 

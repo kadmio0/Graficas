@@ -71,11 +71,11 @@ ColorRGB Triangulo::obtenerColor()
 }
 
 double Triangulo::calcularU(Vector3D& normal){
-    /*double BaryA = ( (B.y-C.y)*(normal.x-C.x) + (C.x-B.x)*(normal.y-C.y) ) / ( (B.y-C.y)*(A.x-C.x) + (C.x-B.x)*(A.y-C.y) );
+    double BaryA = ( (B.y-C.y)*(normal.x-C.x) + (C.x-B.x)*(normal.y-C.y) ) / ( (B.y-C.y)*(A.x-C.x) + (C.x-B.x)*(A.y-C.y) );
     double BaryB = ( (B.y-C.y)*(normal.x-C.x) + (A.x-B.x)*(normal.y-C.y) ) / ( (A.y-C.y)*(A.x-C.x) + (C.x-B.x)*(A.y-C.y) );
     double BaryC = 1 - BaryA - BaryB; 
     return BaryC;
-*/
+
     /*double a = A.x - B.x, b = A.x - C.x, c = normal.x, d = A.x - normal.x; 
     double e = A.y - B.y, f = A.y - C.y, g = normal.y, h = A.y - normal.y; 
     double i = A.z - B.z, j = A.z - C.z, k = normal.z, l = A.z - normal.z; 
@@ -91,28 +91,15 @@ double Triangulo::calcularU(Vector3D& normal){
     double e3 = a * p - b * r + d * s;
     double t = e3 * invDem;
     double u = (1 - beta - gamma) * normal.x + beta * normal.y + gamma * normal.z;*/
-    Vector3D edge = B-A;
-    Vector3D vp0 = q - A; 
-    Vector3D c = edge ^ vp0;
-    double length = sqrt(c.x * c.x + c.y * c.y + c.z * c.z);
-    double length2 = sqrt(normal.x * normal.x + normal.y * normal.y + normal.z * normal.z);
-    return length/length2;
+     
 
 }
 
 double Triangulo::calcularV(Vector3D& normal){
-    // double BaryA = ( (B.y-C.y)*(normal.x-C.x) + (C.x-B.x)*(normal.y-C.y) ) / ( (B.y-C.y)*(A.x-C.x) + (C.x-B.x)*(A.y-C.y) );
-    // double BaryB = ( (B.y-C.y)*(normal.x-C.x) + (A.x-B.x)*(normal.y-C.y) ) / ( (A.y-C.y)*(A.x-C.x) + (C.x-B.x)*(A.y-C.y) );
-    // double BaryC = 1 - BaryA - BaryB; 
-    // return BaryA;
-     
-
-    Vector3D edge = A-B;
-    Vector3D vp0 = q - B; 
-    Vector3D c = edge ^ vp0;
-    double length = sqrt(c.x * c.x + c.y * c.y + c.z * c.z);
-    double length2 = sqrt(normal.x * normal.x + normal.y * normal.y + normal.z * normal.z);
-    return length/length2; 
+    double BaryA = ( (B.y-C.y)*(normal.x-C.x) + (C.x-B.x)*(normal.y-C.y) ) / ( (B.y-C.y)*(A.x-C.x) + (C.x-B.x)*(A.y-C.y) );
+    double BaryB = ( (B.y-C.y)*(normal.x-C.x) + (A.x-B.x)*(normal.y-C.y) ) / ( (A.y-C.y)*(A.x-C.x) + (C.x-B.x)*(A.y-C.y) );
+    double BaryC = 1 - BaryA - BaryB; 
+    return BaryA; 
 }
 
 
