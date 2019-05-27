@@ -10,10 +10,18 @@ class Plano : public ObjetoGeometrico
     ~Plano();
     bool hayImpacto(const Rayo& r, double& t, Vector3D& n, Punto3D& q) const;
     void establecerColor(double, double, double);
-    ColorRGB obtenerColor();
+    ColorRGB obtenerColor(); 
+    ColorRGB obtenerColorTextura(double u,double v);
+    void establecerTextura(Image& img);
+    double calcularU(Vector3D& n);
+    double calcularV(Vector3D& n);
+    bool tieneTextura();
+    
 
     Punto3D p;
     Vector3D n;
     ColorRGB color;
+    Image img;
+    bool textura = false;
 };
 #endif
