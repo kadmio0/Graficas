@@ -13,8 +13,8 @@ class Plano : public ObjetoGeometrico
     ColorRGB obtenerColor(); 
     ColorRGB obtenerColorTextura(double u,double v);
     void establecerTextura(Image& img);
-    double calcularU(Vector3D& n);
-    double calcularV(Vector3D& n);
+    double calcularU(Vector3D& n,Punto3D& q);
+    double calcularV(Vector3D& n,Punto3D& q);
     bool tieneTextura();
     
 

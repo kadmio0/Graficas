@@ -38,11 +38,11 @@ ColorRGB Plano::obtenerColor()
 }
  
 
-double Plano::calcularU(Vector3D& n){
+double Plano::calcularU(Vector3D& n,Punto3D& q){
     return 0;
 }
 
-double Plano::calcularV(Vector3D& n){
+double Plano::calcularV(Vector3D& n,Punto3D& q){
     return 0;
 }
 

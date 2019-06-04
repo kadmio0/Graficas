@@ -4,6 +4,7 @@
 #include "Utilitarios.h"
 #include "LuzPuntual.h"
 #include "Triangulo.h"
+#include "Rectangulo.h"
 #include "Plano.h" 
 #include "Image.h"
 #include <math.h>
@@ -37,8 +38,8 @@ ColorRGB obtenerColorPixel( const Rayo& r,
         if( objetos[i]->hayImpacto(r, t, n, q) && t < tmin){  
              
             if(objetos[i]->tieneTextura()){
-                u = objetos[i]->calcularU(n);
-                v = objetos[i]->calcularV(n); 
+                u = objetos[i]->calcularU(n,q);
+                v = objetos[i]->calcularV(n,q); 
                 objetoColor = objetos[i]->obtenerColorTextura(u,v); 
             }else{
                 objetoColor = objetos[i]->obtenerColor();
@@ -136,21 +137,21 @@ int main() {
     Image img6;
     Image img7;
 
-    img.read_ppm_file("./texturas/ladrillos.ppm");
-    // img2.read_ppm_file("2estrella.ppm");
-    // img3.read_ppm_file("3estrella.ppm");
-    // img4.read_ppm_file("4estrella.ppm");
-    // img5.read_ppm_file("5estrella.ppm");
-    // img6.read_ppm_file("6estrella.ppm");
-    // img7.read_ppm_file("7estrella.ppm");
+    img.read_ppm_file("./texturas/1estrellas.ppm");
+    img2.read_ppm_file("./texturas/2estrellas.ppm");
+    img3.read_ppm_file("./texturas/3estrellas.ppm");
+    img4.read_ppm_file("./texturas/4estrellas.ppm");
+    img5.read_ppm_file("./texturas/5estrellas.ppm");
+    img6.read_ppm_file("./texturas/6estrellas.ppm");
+    img7.read_ppm_file("./texturas/7estrellas.ppm");
 
-    esfera1.establecerTextura(img);
-    // esfera3.establecerTextura(img2);
-    // esfera4.establecerTextura(img3);
-    // esfera5.establecerTextura(img6);
-    // esfera1.establecerTextura(img7);
-    // esfera6.establecerTextura(img4);
-    // esfera7.establecerTextura(img5);
+    esfera2.establecerTextura(img);
+    esfera3.establecerTextura(img2);
+    esfera4.establecerTextura(img3);
+    esfera5.establecerTextura(img6);
+    esfera1.establecerTextura(img7);
+    esfera6.establecerTextura(img4);
+    esfera7.establecerTextura(img5);
 
     //7 estrellas---------------------------------------------------------------------
 
@@ -634,6 +635,15 @@ int main() {
     Punto3D tC2( 800, 400, -1500);
     Triangulo ttriangulo2( tA2, tB2, tC2 );
     ttriangulo2.establecerColor(0.21,0.41,0.44);
+    
+
+    Image img8, img9;
+    img8.read_ppm_file("./texturas/ladrillos.ppm");
+    img9.read_ppm_file("./texturas/lava.ppm");
+
+    ttriangulo2.establecerTextura(img8);
+    ttriangulo2.establecerTextura(img9);
+
 
 
     //z de fondo
@@ -701,9 +711,30 @@ int main() {
     Triangulo tz10( tz10a, tz10b, tz10c );
     tz10.establecerColor(0.9,0.0,0.0);
 
- 
+    Punto3D p0(-400,-300,-900)    ;
+    Vector3D a(800,0,0);
+    Vector3D b(0,600,0);
+    Rectangulo rec(p0,a,b);
+    rec.establecerColor(1,1,1);
+    rec.establecerTextura(img9);
+    Punto3D ce1(-400,-300,-900);
+    Punto3D ce2(400,0,0);
+    Punto3D ce3(0,300,0);
+    double radiop = 5;
+    Esfera e(ce1,radiop);
+    Esfera e2(ce2,radiop);
+    Esfera e3(ce3,radiop);
+    e.establecerColor(1,0,0);
+    e2.establecerColor(0,1,0);
+    e3.establecerColor(0,0,1);
     
+
+
     vector<ObjetoGeometrico*> escena;
+    // escena.push_back(&rec);
+    // escena.push_back(&e);
+    // escena.push_back(&e2);
+    // escena.push_back(&e3);
     escena.push_back(&esfera1);
     escena.push_back(&esfera2);
     escena.push_back(&esfera3);
@@ -711,90 +742,90 @@ int main() {
     escena.push_back(&esfera5);
     escena.push_back(&esfera6);
     escena.push_back(&esfera7);
-    escena.push_back(&triangulo);
-    escena.push_back(&triangulo_1);
-    escena.push_back(&triangulo_2);
-    escena.push_back(&triangulo2);
-    escena.push_back(&triangulo2_1);
-    escena.push_back(&triangulo2_2);
-    escena.push_back(&triangulo3);
-    escena.push_back(&triangulo3_1);
-    escena.push_back(&triangulo3_2);
-    escena.push_back(&triangulo4);
-    escena.push_back(&triangulo4_1);
-    escena.push_back(&triangulo4_2);
-    escena.push_back(&triangulo5);
-    escena.push_back(&triangulo5_1);
-    escena.push_back(&triangulo5_2);
-    escena.push_back(&triangulo6);
-    escena.push_back(&triangulo6_1);
-    escena.push_back(&triangulo6_2);
-    escena.push_back(&triangulo7);
-    escena.push_back(&triangulo7_1);
-    escena.push_back(&triangulo7_2);
-    escena.push_back(&triangulo8);
-    escena.push_back(&triangulo8_1);
-    escena.push_back(&triangulo8_2);
-    escena.push_back(&triangulo9);
-    escena.push_back(&triangulo9_1);
-    escena.push_back(&triangulo9_2);
-    escena.push_back(&triangulo10);
-    escena.push_back(&triangulo10_1);
-    escena.push_back(&triangulo10_2);
-    escena.push_back(&triangulo11);
-    escena.push_back(&triangulo11_1);
-    escena.push_back(&triangulo11_2);
-    escena.push_back(&triangulo12);
-    escena.push_back(&triangulo12_1);
-    escena.push_back(&triangulo12_2);
-    escena.push_back(&triangulo13);
-    escena.push_back(&triangulo13_1);
-    escena.push_back(&triangulo13_2);
-    escena.push_back(&triangulo14);
-    escena.push_back(&triangulo14_1);
-    escena.push_back(&triangulo14_2);
-    escena.push_back(&triangulo15);
-    escena.push_back(&triangulo15_1);
-    escena.push_back(&triangulo15_2);
-    escena.push_back(&triangulo16);
-    escena.push_back(&triangulo16_1);
-    escena.push_back(&triangulo16_2);
-    escena.push_back(&triangulo20);
-    escena.push_back(&triangulo20_1);
-    escena.push_back(&triangulo20_2);
-    escena.push_back(&triangulo21);
-    escena.push_back(&triangulo21_1);
-    escena.push_back(&triangulo21_2);
-    escena.push_back(&triangulo22);
-    escena.push_back(&triangulo22_1);
-    escena.push_back(&triangulo22_2);
-    escena.push_back(&triangulo23);
-    escena.push_back(&triangulo23_1);
-    escena.push_back(&triangulo23_2);
-    escena.push_back(&triangulo24);
-    escena.push_back(&triangulo24_1);
-    escena.push_back(&triangulo24_2);
-    escena.push_back(&triangulo25);
-    escena.push_back(&triangulo25_1);
-    escena.push_back(&triangulo25_2);
-    escena.push_back(&triangulo26);
-    escena.push_back(&triangulo26_1);
-    escena.push_back(&triangulo26_2);
-    escena.push_back(&triangulo27);
-    escena.push_back(&triangulo27_1);
-    escena.push_back(&triangulo27_2);
-    escena.push_back(&triangulo28);
-    escena.push_back(&triangulo28_1);
-    escena.push_back(&triangulo28_2);
-    escena.push_back(&triangulo29);
-    escena.push_back(&triangulo29_1);
-    escena.push_back(&triangulo29_2);
-    escena.push_back(&triangulo30);
-    escena.push_back(&triangulo30_1);
-    escena.push_back(&triangulo30_2);
-    escena.push_back(&triangulo31);
-    escena.push_back(&triangulo31_1);
-    escena.push_back(&triangulo31_2);
+    // escena.push_back(&triangulo);
+    // escena.push_back(&triangulo_1);
+    // escena.push_back(&triangulo_2);
+    // escena.push_back(&triangulo2);
+    // escena.push_back(&triangulo2_1);
+    // escena.push_back(&triangulo2_2);
+    // escena.push_back(&triangulo3);
+    // escena.push_back(&triangulo3_1);
+    // escena.push_back(&triangulo3_2);
+    // escena.push_back(&triangulo4);
+    // escena.push_back(&triangulo4_1);
+    // escena.push_back(&triangulo4_2);
+    // escena.push_back(&triangulo5);
+    // escena.push_back(&triangulo5_1);
+    // escena.push_back(&triangulo5_2);
+    // escena.push_back(&triangulo6);
+    // escena.push_back(&triangulo6_1);
+    // escena.push_back(&triangulo6_2);
+    // escena.push_back(&triangulo7);
+    // escena.push_back(&triangulo7_1);
+    // escena.push_back(&triangulo7_2);
+    // escena.push_back(&triangulo8);
+    // escena.push_back(&triangulo8_1);
+    // escena.push_back(&triangulo8_2);
+    // escena.push_back(&triangulo9);
+    // escena.push_back(&triangulo9_1);
+    // escena.push_back(&triangulo9_2);
+    // escena.push_back(&triangulo10);
+    // escena.push_back(&triangulo10_1);
+    // escena.push_back(&triangulo10_2);
+    // escena.push_back(&triangulo11);
+    // escena.push_back(&triangulo11_1);
+    // escena.push_back(&triangulo11_2);
+    // escena.push_back(&triangulo12);
+    // escena.push_back(&triangulo12_1);
+    // escena.push_back(&triangulo12_2);
+    // escena.push_back(&triangulo13);
+    // escena.push_back(&triangulo13_1);
+    // escena.push_back(&triangulo13_2);
+    // escena.push_back(&triangulo14);
+    // escena.push_back(&triangulo14_1);
+    // escena.push_back(&triangulo14_2);
+    // escena.push_back(&triangulo15);
+    // escena.push_back(&triangulo15_1);
+    // escena.push_back(&triangulo15_2);
+    // escena.push_back(&triangulo16);
+    // escena.push_back(&triangulo16_1);
+    // escena.push_back(&triangulo16_2);
+    // escena.push_back(&triangulo20);
+    // escena.push_back(&triangulo20_1);
+    // escena.push_back(&triangulo20_2);
+    // escena.push_back(&triangulo21);
+    // escena.push_back(&triangulo21_1);
+    // escena.push_back(&triangulo21_2);
+    // escena.push_back(&triangulo22);
+    // escena.push_back(&triangulo22_1);
+    // escena.push_back(&triangulo22_2);
+    // escena.push_back(&triangulo23);
+    // escena.push_back(&triangulo23_1);
+    // escena.push_back(&triangulo23_2);
+    // escena.push_back(&triangulo24);
+    // escena.push_back(&triangulo24_1);
+    // escena.push_back(&triangulo24_2);
+    // escena.push_back(&triangulo25);
+    // escena.push_back(&triangulo25_1);
+    // escena.push_back(&triangulo25_2);
+    // escena.push_back(&triangulo26);
+    // escena.push_back(&triangulo26_1);
+    // escena.push_back(&triangulo26_2);
+    // escena.push_back(&triangulo27);
+    // escena.push_back(&triangulo27_1);
+    // escena.push_back(&triangulo27_2);
+    // escena.push_back(&triangulo28);
+    // escena.push_back(&triangulo28_1);
+    // escena.push_back(&triangulo28_2);
+    // escena.push_back(&triangulo29);
+    // escena.push_back(&triangulo29_1);
+    // escena.push_back(&triangulo29_2);
+    // escena.push_back(&triangulo30);
+    // escena.push_back(&triangulo30_1);
+    // escena.push_back(&triangulo30_2);
+    // escena.push_back(&triangulo31);
+    // escena.push_back(&triangulo31_1);
+    // escena.push_back(&triangulo31_2);
 
     escena.push_back(&tz1);
     escena.push_back(&tz2);

@@ -1,7 +1,6 @@
 #include "Esfera.h"
 #include<iostream>
-#include <math.h>  
-//#include "CImg.h"
+#include <math.h>   
 using namespace std; 
 
 
@@ -71,7 +70,7 @@ ColorRGB Esfera::obtenerColor()
 // u= phi / (2 * PI);
 // v = theta / PI;
 
-double Esfera::calcularU(Vector3D& n){
+double Esfera::calcularU(Vector3D& n,Punto3D& q){
     double PI = 3.14159265358979323846;
     Vector3D normal = n;
     normal.hat();
@@ -81,7 +80,7 @@ double Esfera::calcularU(Vector3D& n){
     //u = 1 - phi / (2*PI);
 }
 
-double Esfera::calcularV(Vector3D& n){
+double Esfera::calcularV(Vector3D& n,Punto3D& q){
     double PI = 3.14159265358979323846;
     Vector3D normal = n;
     normal.hat();

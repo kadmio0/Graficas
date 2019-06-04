@@ -11,8 +11,8 @@ class ObjetoGeometrico{
     virtual ColorRGB obtenerColor() = 0;
     virtual ColorRGB obtenerColorTextura(double u,double v) = 0;
     virtual void establecerTextura(Image& img) = 0;
-    virtual double calcularU(Vector3D& n) = 0;
-    virtual double calcularV(Vector3D& n) = 0; 
+    virtual double calcularU(Vector3D& n,Punto3D& q) = 0;
+    virtual double calcularV(Vector3D& n,Punto3D& q) = 0; 
     virtual bool tieneTextura() = 0;
 };
 #endif

@@ -58,8 +58,8 @@ Image::read_ppm_file(const char* file_name) {
     if (file == 0){
 		cout << "No se pudo abrir el archivo" << endl;
 	}
-	else
-		cout << "Archivo abierto" << endl;
+	// else
+	// 	cout << "Archivo abierto" << endl;
 
     // PPM header
     
@@ -88,14 +88,14 @@ Image::read_ppm_file(const char* file_name) {
 
     if (hres <= 0)
 		cout << "Ancho de imagen invalido" << endl;
-	else
-		cout << "hres = " << hres << endl;
+	// else
+	// 	cout << "hres = " << hres << endl;
 
     
 	if (vres <= 0)
 		cout << "Alto de imagen invalido" << endl;
-	else
-		cout << "vres = " << vres << endl;
+	// else
+	// 	cout << "vres = " << vres << endl;
 
 
     // maximum value to be found in the PPM file (usually 255)
@@ -142,7 +142,7 @@ Image::read_ppm_file(const char* file_name) {
 ColorRGB Image::get_color(const int row, const int column) const {
 	//int index = column + hres * (vres - row - 1);
 	int index = column + hres * (vres - row - 1);
-	//int index = row + (column * hres); 
+	//int index = row + (column * hres);  
 	ColorRGB color, colorRojo;
     colorRojo.r=1;
     colorRojo.g=0;

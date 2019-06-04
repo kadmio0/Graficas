@@ -70,11 +70,11 @@ ColorRGB Triangulo::obtenerColor()
     return  c;
 }
 
-double Triangulo::calcularU(Vector3D& normal){
-    double BaryA = ( (B.y-C.y)*(normal.x-C.x) + (C.x-B.x)*(normal.y-C.y) ) / ( (B.y-C.y)*(A.x-C.x) + (C.x-B.x)*(A.y-C.y) );
-    double BaryB = ( (B.y-C.y)*(normal.x-C.x) + (A.x-B.x)*(normal.y-C.y) ) / ( (A.y-C.y)*(A.x-C.x) + (C.x-B.x)*(A.y-C.y) );
-    double BaryC = 1 - BaryA - BaryB; 
-    return BaryC;
+double Triangulo::calcularU(Vector3D& normal,Punto3D& q){
+    // double BaryA = ( (B.y-C.y)*(q.x-C.x) + (C.x-B.x)*(q.y-C.y) ) / ( (B.y-C.y)*(A.x-C.x) + (C.x-B.x)*(A.y-C.y) );
+    // double BaryB = ( (C.y-A.y)*(q.x-C.x) + (A.x-C.x)*(q.y-C.y) ) / ( (B.y-C.y)*(A.x-C.x) + (C.x-B.x)*(A.y-C.y) );
+    // double BaryC = 1 - BaryA - BaryB; 
+    // return BaryA;
 
     /*double a = A.x - B.x, b = A.x - C.x, c = normal.x, d = A.x - normal.x; 
     double e = A.y - B.y, f = A.y - C.y, g = normal.y, h = A.y - normal.y; 
@@ -92,20 +92,38 @@ double Triangulo::calcularU(Vector3D& normal){
     double t = e3 * invDem;
     double u = (1 - beta - gamma) * normal.x + beta * normal.y + gamma * normal.z;*/
      
+    double ABC = normal * ((B-A)^(C-A));
+    double PBC = normal * ((B-q)^(C-q));
+    double PCA = normal * ((C-q)^(A-q));
+    
+    double baryX = PBC /  ABC ; // alpha
+    double baryY = PCA /  ABC ; // beta
+    double baryZ = 1.0 - baryX - baryY ; // gamma 
 
+    return baryZ;
 }
 
-double Triangulo::calcularV(Vector3D& normal){
-    double BaryA = ( (B.y-C.y)*(normal.x-C.x) + (C.x-B.x)*(normal.y-C.y) ) / ( (B.y-C.y)*(A.x-C.x) + (C.x-B.x)*(A.y-C.y) );
-    double BaryB = ( (B.y-C.y)*(normal.x-C.x) + (A.x-B.x)*(normal.y-C.y) ) / ( (A.y-C.y)*(A.x-C.x) + (C.x-B.x)*(A.y-C.y) );
-    double BaryC = 1 - BaryA - BaryB; 
-    return BaryA; 
+double Triangulo::calcularV(Vector3D& normal,Punto3D& q){
+    // double BaryA = ( (B.y-C.y)*(normal.x-C.x) + (C.x-B.x)*(normal.y-C.y) ) / ( (B.y-C.y)*(A.x-C.x) + (C.x-B.x)*(A.y-C.y) );
+    // double BaryB = ( (B.y-C.y)*(normal.x-C.x) + (A.x-B.x)*(normal.y-C.y) ) / ( (A.y-C.y)*(A.x-C.x) + (C.x-B.x)*(A.y-C.y) );
+    // double BaryC = 1 - BaryA - BaryB; 
+    // return BaryC; 
+     
+    double ABC = normal * ((B-A)^(C-A));
+    double PBC = normal * ((B-q)^(C-q));
+    double PCA = normal * ((C-q)^(A-q));
+    
+    double baryX =  PBC / ABC ; // alpha
+    double baryY =  PCA / ABC ; // beta
+    double baryZ = 1.0 - baryX - baryY ; // gamma 
+
+    return baryX;
 }
 
 
 ColorRGB Triangulo::obtenerColorTextura(double u,double v){
-    int column = u * img.hres;
-    int row = v * img.vres; 
+    int column = u * (img.hres);
+    int row = v * (img.vres); 
     return img.get_color(row,column);
 }
 
