@@ -34,6 +34,7 @@ class Rectangulo: public ObjetoGeometrico
 
 		ColorRGB color;
     	Image img;
+		int index;
     	bool textura = false;	 
 };
 #endif

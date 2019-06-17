@@ -7,6 +7,7 @@
 #include "Rectangulo.h"
 #include "Plano.h" 
 #include "Image.h"
+#include "ImageTexture.h"
 #include <math.h>
 #include <vector>
 #include <iostream>
@@ -16,12 +17,10 @@ ColorRGB obtenerColorPixel( const Rayo& r,
                             vector<ObjetoGeometrico*> objetos, 
                             LuzPuntual luz, 
                             LuzPuntual luz_ambiente,
-                            Image& img){
+                            Image& img,
+                            ImageTexture& a){
     
-    ColorRGB color;
-    color.r = 0.0;
-    color.g = 0.0;
-    color.b = 0.0;
+    ColorRGB color=a.get_color(); 
     double t;
     double tmin = 2000000;    
     Vector3D n;
@@ -45,7 +44,7 @@ ColorRGB obtenerColorPixel( const Rayo& r,
                 objetoColor = objetos[i]->obtenerColor();
             } 
             
-            if(i<objetos.size()-2){
+           // if(i<objetos.size()-2){
                 color.r = objetoColor.r * luz_ambiente.color.r;
                 color.g = objetoColor.g * luz_ambiente.color.g;
                 color.b = objetoColor.b * luz_ambiente.color.b;
@@ -62,7 +61,7 @@ ColorRGB obtenerColorPixel( const Rayo& r,
                         t_min_sombra = t_sombra;
                     }
                 }
-            }
+            /*}
             else{
                 color.r = objetos[i]->obtenerColor().r * luz_ambiente.color.r + objetos[i]->obtenerColor().r * luz.color.r * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().r * luz.color.r * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),100);
                 color.g = objetos[i]->obtenerColor().g * luz_ambiente.color.g + objetos[i]->obtenerColor().g * luz.color.g * std::max(0.0, n * (luz.posicion - q).hat() ) + objetos[i]->obtenerColor().g * luz.color.g * pow(std::max(0.0, n * ((-1)*r.d + (luz.posicion - q).hat()).hat() ),100);
@@ -82,7 +81,7 @@ ColorRGB obtenerColorPixel( const Rayo& r,
                     }
                 }
 
-            }
+            }*/
             tmin = t;
         }
     }
@@ -638,8 +637,8 @@ int main() {
     
 
     Image img8, img9;
-    img8.read_ppm_file("./texturas/ladrillos.ppm");
-    img9.read_ppm_file("./texturas/lava.ppm");
+    // img8.read_ppm_file("./texturas/ladrillos.ppm");
+    //img9.read_ppm_file("./texturas/es.ppm");
 
     ttriangulo2.establecerTextura(img8);
     ttriangulo2.establecerTextura(img9);
@@ -717,6 +716,8 @@ int main() {
     Rectangulo rec(p0,a,b);
     rec.establecerColor(1,1,1);
     rec.establecerTextura(img9);
+
+
     Punto3D ce1(-400,-300,-900);
     Punto3D ce2(400,0,0);
     Punto3D ce3(0,300,0);
@@ -839,9 +840,14 @@ int main() {
     escena.push_back(&tz10);
 
 
-    escena.push_back(&ttriangulo1); 
-    escena.push_back(&ttriangulo2);
+    // escena.push_back(&ttriangulo1); 
+    // escena.push_back(&ttriangulo2);
 
+
+    Image l;
+    l.read_ppm_file("./texturas/es.ppm");
+    ImageTexture imgTex(&l);
+    ColorRGB color_pixel;
      // VIEWPLANE
     int hres = 800;
     int vres = 600;
@@ -871,9 +877,10 @@ int main() {
             double z = 0;
             Punto3D origen(x, y, z);
             Rayo rayo(origen, direccion); 
-            pixeles[fil*width+col].r = obtenerColorPixel(rayo, escena, luz, luz_ambiente,img).r;
-            pixeles[fil*width+col].g = obtenerColorPixel(rayo, escena, luz, luz_ambiente,img).g;
-            pixeles[fil*width+col].b = obtenerColorPixel(rayo, escena, luz, luz_ambiente,img).b;
+            color_pixel = obtenerColorPixel(rayo, escena, luz, luz_ambiente,img,imgTex);
+            pixeles[fil*width+col].r = color_pixel.r;
+            pixeles[fil*width+col].g = color_pixel.g;
+            pixeles[fil*width+col].b = color_pixel.b;
         }
     }    
     savebmp("img.bmp", width, height, dpi, pixeles);

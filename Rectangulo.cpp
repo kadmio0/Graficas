@@ -17,11 +17,12 @@ Rectangulo::Rectangulo(const Punto3D _p0, const Vector3D _a, const Vector3D _b)
 	cout<<normal.x<<endl;
 	cout<<normal.y<<endl;
 	cout<<normal.z<<endl;
-	cout<<"width: "<<width<<endl;
-	cout<<"height: "<<height<<endl;
+	// cout<<"RECwidth: "<<width<<endl;
+	// cout<<"RECheight: "<<height<<endl;
 	color.r=0.0;	
 	color.g=0.0;
 	color.b=1.0;
+	index=0;
 } 
  
 Rectangulo::~Rectangulo () {
@@ -40,12 +41,12 @@ bool Rectangulo::hayImpacto(const Rayo& rayo, double& tmin, Vector3D& n, Punto3D
 	
 	double ddota = d * a;
 	
-	if (ddota < 0.0)// || ddota > width)
+	if (ddota < 0.0 || ddota > width)
 		return (false);
 		
 	double ddotb = d * b;
 	
-	if (ddotb < 0.0)// || ddotb > height)
+	if (ddotb < 0.0 || ddotb > height)
 		return (false);
 		
 	tmin = t;
@@ -83,7 +84,8 @@ double Rectangulo::calcularV(Vector3D& n,Punto3D& q){
 ColorRGB Rectangulo::obtenerColorTextura(double u,double v){
     int column = (img.hres) * u;
     int row = (img.vres) * v; 
-    return img.get_color(row,column);
+	index++;
+    return img.get_color(index);
 }
 
 void Rectangulo::establecerTextura(Image& img2){

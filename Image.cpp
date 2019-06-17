@@ -147,13 +147,22 @@ ColorRGB Image::get_color(const int row, const int column) const {
     colorRojo.r=1;
     colorRojo.g=0;
     colorRojo.b=0;    
-	if (index < pixels.size() && index >= 0){
-		color.r=pixels[index].r; 
-		color.g=pixels[index].g; 
-		color.b=pixels[index].b;  
-		return color;     
+	if (index < pixels.size() && index >= 0){  
+		return pixels[index];     
 	} else{
 		//cout << "ROJO"<<endl;
+		return colorRojo;
+	}
+}
+
+ColorRGB Image::get_color(int& index) const { 
+	ColorRGB color, colorRojo;
+    colorRojo.r=1;
+    colorRojo.g=0;
+    colorRojo.b=0;    
+	if (index < pixels.size() && index >= 0){
+		return pixels[index]; 
+	} else{ 
 		return colorRojo;
 	}
 }

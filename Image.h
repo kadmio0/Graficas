@@ -10,9 +10,8 @@
 // This is used for image based textures, including ramp textures such as marble and sandstone
 // I originally chose the PPM format because it's simple to parse
 #ifndef IMAGE_H
-#define IMAGE_H
+#define IMAGE_H 
 #pragma once
-
 #include <vector>		
 #include "ColorRGB.h"
 using namespace std;
@@ -31,16 +30,14 @@ class Image {
 
 		~Image(void) ;								
 		
-		void										
-		read_ppm_file(const char* file_name);
+		void read_ppm_file(const char* file_name);
 		
-		int
-		get_hres(void);	
+		int get_hres(void);	
 		
-		int
-		get_vres(void);	
+		int get_vres(void);	
 				
 		ColorRGB get_color(const int row, const int col) const;		
+		ColorRGB get_color(int& index) const;		
 		
 	public:
 		int 				hres;			// horizontal resolution of image
@@ -48,5 +45,18 @@ class Image {
 		vector<ColorRGB> 	pixels;
 }; 
  
+//--------------------------------------------------------------------- get_hres
 
+inline int
+Image::get_hres(void) {
+	return (hres);
+}
+
+
+//--------------------------------------------------------------------- get_vres
+
+inline int
+Image::get_vres(void) {
+	return (vres);
+}
 #endif
